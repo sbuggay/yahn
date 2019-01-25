@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import queryString from "query-string";
-import { getItem } from '../hn/api';
-import { IItem } from './Item';
+import { HNAPI } from '../hn/api';
+import { IItem } from '../hn/interfaces';
 
 class ItemPage extends Component<any, IItem> {
 
@@ -11,8 +11,8 @@ class ItemPage extends Component<any, IItem> {
 			return;
 		}
 
-		getItem(parseInt(query.id)).then(item => {
-			const kids = item.kids.map(kid => getItem(kid));
+		HNAPI.getItem(parseInt(query.id)).then(item => {
+			const kids = item.kids.map(kid => HNAPI.getItem(kid));
 
 			Promise.all(kids).then(comments => {
 				this.setState({
@@ -24,8 +24,8 @@ class ItemPage extends Component<any, IItem> {
 	}
 
 	render() {
-		const renderComments = (comments: IItem[]) => comments.map(comment => (
-			<div>
+		const renderComments = (comments: IItem[]) => comments.map((comment, index) => (
+			<div key={index}>
 				{comment.text}
 			</div>
 		));
