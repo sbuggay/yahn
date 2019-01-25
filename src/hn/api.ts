@@ -1,4 +1,4 @@
-import { IItem } from "./interfaces";
+import { IItem, IUser } from "./interfaces";
 
 export const apiUrl = "https://hacker-news.firebaseio.com";
 export const apiVersion = "v0";
@@ -27,6 +27,10 @@ export class HNAPI {
 		const res = await apiRequest(`item/${id}`);
 		cache[id] = res;
 		return res;
+	}
+
+	static getUser(id: string): Promise<IUser> {
+		return apiRequest(`user/${id}`)
 	}
 
 	static getMaxItem(): Promise<number> {

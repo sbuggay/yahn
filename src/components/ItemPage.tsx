@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import queryString from "query-string";
 import { HNAPI } from '../hn/api';
 import { IItem } from '../hn/interfaces';
+import Comment from "./Comment";
+import { Link } from 'react-router-dom';
 
 class ItemPage extends Component<any, IItem> {
 
@@ -24,10 +26,8 @@ class ItemPage extends Component<any, IItem> {
 	}
 
 	render() {
-		const renderComments = (comments: IItem[]) => comments.map((comment, index) => (
-			<div key={index}>
-				{comment.text}
-			</div>
+		const renderComments = (comments: IItem[]) => comments.map((item, index) => (
+			<Comment item={item} key={index} />
 		));
 
 		if (!this.state) {
@@ -39,6 +39,7 @@ class ItemPage extends Component<any, IItem> {
 		return (
 			<div>
 				{this.state.title}
+				<Link to={`/user?id=${this.state.by}`}>{this.state.by}</Link>
 				{renderComments(this.state.comments)}
 			</div>
 		);

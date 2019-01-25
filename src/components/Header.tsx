@@ -11,7 +11,8 @@ class Header extends Component {
 
     getLinkStyle(): React.CSSProperties {
         return {
-            margin: "5px 10px"
+            margin: "5px 10px",
+            color: "black"
         }
     }
 

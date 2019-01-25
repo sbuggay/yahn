@@ -24,3 +24,12 @@ export interface IItem {
     descendants: number;
     comments: IItem[];
 }
+
+export interface IUser {
+    id: string;
+    delay: number;
+    created: number;
+    karma: number;
+    about: string;
+    submitted: number[];
+}
