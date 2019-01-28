@@ -5,24 +5,33 @@ class Header extends Component {
     getStyle(): React.CSSProperties {
         return {
             width: "100%",
-            backgroundColor: "#ff6600"
+            backgroundColor: "#ff6600",
+            height: "40px"
         }
     }
 
-    getLinkStyle(): React.CSSProperties {
+    getInnerStyle(): React.CSSProperties {
         return {
-            margin: "5px 10px",
-            color: "black"
+            width: "800px",
+            display: "flex",
+            alignItems: "center",
+            margin: "0 auto",
+            height: "100%"
         }
     }
 
     render() {
         return (
-            <div style={this.getStyle()}>
-                <Link style={this.getLinkStyle()} to="/">YAHN</Link>
-                <Link style={this.getLinkStyle()} to="/new">new</Link>
-                <Link style={this.getLinkStyle()} to="/comments">comments</Link>
-            </div>
+            <header style={this.getStyle()}>
+                <div style={this.getInnerStyle()}>
+                    <Link to="/">YAHN</Link>
+                    <Link to="/new">new</Link>
+                    <Link to="/ask">ask</Link>
+                    <Link to="/show">show</Link>
+                    <Link to="/jobs">jobs</Link>
+                </div>
+
+            </header>
         );
     }
 }

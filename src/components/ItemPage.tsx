@@ -4,6 +4,8 @@ import { HNAPI } from '../hn/api';
 import { IItem } from '../hn/interfaces';
 import Comment from "./Comment";
 import { Link } from 'react-router-dom';
+import { Http2ServerRequest } from 'http2';
+import Item from './Item';
 
 class ItemPage extends Component<any, IItem> {
 
@@ -14,6 +16,11 @@ class ItemPage extends Component<any, IItem> {
 		}
 
 		HNAPI.getItem(parseInt(query.id)).then(item => {
+
+			this.setState({
+				...item
+			});
+
 			const kids = item.kids.map(kid => HNAPI.getItem(kid));
 
 			Promise.all(kids).then(comments => {
@@ -27,7 +34,10 @@ class ItemPage extends Component<any, IItem> {
 
 	render() {
 		const renderComments = (comments: IItem[]) => comments.map((item, index) => (
-			<Comment item={item} key={index} />
+			<div>
+				<Comment item={item} key={index} />
+				{index !== comments.length - 1 ? <hr /> : null}
+			</div>
 		));
 
 		if (!this.state) {
@@ -38,9 +48,11 @@ class ItemPage extends Component<any, IItem> {
 
 		return (
 			<div>
-				{this.state.title}
-				<Link to={`/user?id=${this.state.by}`}>{this.state.by}</Link>
-				{renderComments(this.state.comments)}
+				<Item item={this.state} />
+				{this.state.text ? <div dangerouslySetInnerHTML={{ __html: this.state.text }} /> : null}
+				<div style={{ marginTop: "10px" }}>
+					{this.state.comments ? renderComments(this.state.comments) : null}
+				</div>
 			</div>
 		);
 	}

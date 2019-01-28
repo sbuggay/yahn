@@ -12,12 +12,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.details > span {
-  color: gray;
-  padding-right: 5px;
-}
-
-.details > span > a {
-  color: gray;
-}

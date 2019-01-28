@@ -6,17 +6,19 @@ export const apiEndpoint = `${apiUrl}/${apiVersion}`;
 
 const cache: { [id: number]: IItem } = {};
 
+export enum EListTypes {
+	topstories = "topstories",
+	newstories = "newstories",
+	beststories = "beststories",
+	askstories = "askstories",
+	showstories = "showstories",
+	jobstories = "jobstories"
+}
+
 export class HNAPI {
-	static getTopStories(): Promise<number[]> {
-		return apiRequest("topstories");
-	}
 
-	static getNewStories(): Promise<number[]> {
-		return apiRequest("newstories");
-	}
-
-	static getBestStories(): Promise<number[]> {
-		return apiRequest("beststories");
+	static getList(type: EListTypes): Promise<number[]> {
+		return apiRequest(type);
 	}
 
 	static async getItem(id: number): Promise<IItem> {
