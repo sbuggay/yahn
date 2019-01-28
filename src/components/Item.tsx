@@ -17,16 +17,33 @@ class Item extends Component<{ item: IItem }, any> {
 		}
 	}
 
+	renderCommentInfo() {
+		const item = this.props.item;
+		if (!item.kids) {
+			return <span> | no comments</span>;
+		}
+
+		return (
+			<span> | <Link style={{ color: "#444" }} to={`/yahn/item?id=${item.id}`}>{item.kids.length} comment{item.kids.length === 1 ? "" : "s"}</Link></span>
+		);
+	}
+
 	render() {
+		function url_domain(data: string) {
+			var a = document.createElement("a");
+			a.href = data;
+			return a.hostname;
+		}
+
 		const item = this.props.item;
 		return (
 			<div style={this.getStyle()}>
-				<a href={item.url}>{item.title}</a>
+				<span><a href={item.url}>{item.title}</a> <a style={{ color: "#444" }} href="">({url_domain(item.url)})</a></span>
 				<div style={this.getSubStyle()}>
 					<span>{item.score} points</span>
-					<span> by <Link style={{color: "#444"}} to={`/yahn/user?id=${item.by}`}>{item.by}</Link></span>
+					<span> by <Link style={{ color: "#444" }} to={`/yahn/user?id=${item.by}`}>{item.by}</Link></span>
 					<span> {dayjs().diff(dayjs(item.time * 1000), "hour")} hours ago</span>
-					<span> | <Link style={{color: "#444"}} to={`/yahn/item?id=${item.id}`}>{item.kids ? item.kids.length : 0} comments</Link></span>
+					{this.renderCommentInfo()}
 				</div>
 			</div>
 		);

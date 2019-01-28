@@ -56,13 +56,17 @@ class Comment extends Component<{ item: IItem }, IState> {
 
     render() {
         const item = this.props.item;
+
+        if (!item) {
+            return null;
+        }
+
         return (
             <div>
                 <div style={{ color: "#444" }}>{item.by} {dayjs().diff(dayjs(item.time * 1000), "hour")} hours ago</div>
                 <div dangerouslySetInnerHTML={{ __html: item.text }} />
                 <div style={{ marginTop: "10px" }}>{this.renderChildren()}</div>
             </div>
-
         );
     }
 

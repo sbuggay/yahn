@@ -4,6 +4,7 @@ import Item from './Item';
 import { IItem } from '../hn/interfaces';
 import queryString from "query-string";
 import { Link } from 'react-router-dom';
+import LoadingSpinner from './LoadingSpinner';
 
 interface IProps {
 	listFunction: () => Promise<number[]>;
@@ -32,7 +33,7 @@ class List extends Component<IProps, IState> {
 		const page = query.p ? (parseInt(query.p as string) - 1) * 30 : 0
 		const data = this.props.listFunction ? this.props.listFunction : () => HNAPI.getList(EListTypes.topstories);
 
-		
+
 
 		data().then(json => {
 			json = json.slice(page, page + 30);
@@ -47,6 +48,14 @@ class List extends Component<IProps, IState> {
 
 	render() {
 		const renderStories = () => {
+			if (this.state.stories.length === 0) {
+				return (
+					<div style={{ width: "64px", height: "64px", margin: "64px auto" }}>
+						<LoadingSpinner />
+					</div>
+				);
+			}
+
 			return this.state.stories.map((item, index) => {
 				return (
 					<Item key={index} item={item} />

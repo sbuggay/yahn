@@ -11,7 +11,7 @@ class App extends Component {
 	getStyle(): React.CSSProperties {
 		return {
 			width: "800px",
-			margin: "0 auto"
+			margin: "0 auto 200px"
 		}
 	}
 

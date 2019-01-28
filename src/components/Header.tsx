@@ -6,7 +6,9 @@ class Header extends Component {
         return {
             width: "100%",
             backgroundColor: "#ff6600",
-            height: "30px"
+            height: "30px",
+            display: "flex",
+            justifyContent: "space-between"
         }
     }
 
@@ -35,13 +37,15 @@ class Header extends Component {
         return (
             <header style={this.getStyle()}>
                 <div style={this.getInnerStyle()}>
-                    <img style={{ border: "1px white solid", marginRight: "10px" }} src="https://news.ycombinator.com/y18.gif"></img>
+                    <Link to="/yahn" style={{ marginRight: "10px", color: "white", border: "1px white solid", width: "20px", height: "20px", textAlign: "center" }}>Y</Link>
+                    {/* <img style={{ border: "1px white solid", marginRight: "10px" }} src="https://news.ycombinator.com/y18.gif"></img> */}
                     {this.renderLink("/yahn", "YAHN")}
                     {this.renderLink("/yahn/new", "new")}
                     {this.renderLink("/yahn/ask", "ask")}
                     {this.renderLink("/yahn/show", "show")}
                     {this.renderLink("/yahn/jobs", "jobs")}
                 </div>
+
             </header>
         );
     }
