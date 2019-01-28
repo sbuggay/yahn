@@ -1,10 +1,12 @@
 import { IItem, IUser } from "./interfaces";
+import { getMaxListeners } from "cluster";
 
 export const apiUrl = "https://hacker-news.firebaseio.com";
 export const apiVersion = "v0";
 export const apiEndpoint = `${apiUrl}/${apiVersion}`;
 
-const cache: { [id: number]: IItem } = {};
+const listCache: { [list: string]: number[] } = {}
+const itemCache: { [id: number]: IItem } = {};
 
 export enum EListTypes {
 	topstories = "topstories",
@@ -15,19 +17,44 @@ export enum EListTypes {
 	jobstories = "jobstories"
 }
 
+const listTypes = [
+	EListTypes.topstories,
+	EListTypes.newstories,
+	EListTypes.beststories,
+	EListTypes.askstories,
+	EListTypes.showstories,
+	EListTypes.jobstories
+];
+
 export class HNAPI {
 
-	static getList(type: EListTypes): Promise<number[]> {
-		return apiRequest(type);
+	static async getList(type: EListTypes): Promise<number[]> {
+
+		if (listCache[type]) {
+			return Promise.resolve(listCache[type]);
+		}
+
+		const res = await apiRequest(type);
+
+		// If this is our first list, resolve it then go ahead and pre-cache everything else.
+		if (Object.keys(listCache).length === 0) {
+			listTypes.forEach(list => {
+				if (list === type) return; // already getting this
+				HNAPI.getList(list);
+			});
+		}
+
+		listCache[type] = res;
+		return res;
 	}
 
 	static async getItem(id: number): Promise<IItem> {
-		if (cache[id]) {
-			return Promise.resolve(cache[id]);
+		if (itemCache[id]) {
+			return Promise.resolve(itemCache[id]);
 		}
 
 		const res = await apiRequest(`item/${id}`);
-		cache[id] = res;
+		itemCache[id] = res;
 		return res;
 	}
 

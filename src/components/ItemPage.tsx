@@ -3,8 +3,6 @@ import queryString from "query-string";
 import { HNAPI } from '../hn/api';
 import { IItem } from '../hn/interfaces';
 import Comment from "./Comment";
-import { Link } from 'react-router-dom';
-import { Http2ServerRequest } from 'http2';
 import Item from './Item';
 
 class ItemPage extends Component<any, IItem> {
@@ -34,8 +32,8 @@ class ItemPage extends Component<any, IItem> {
 
 	render() {
 		const renderComments = (comments: IItem[]) => comments.map((item, index) => (
-			<div>
-				<Comment item={item} key={index} />
+			<div key={index} >
+				<Comment item={item} />
 				{index !== comments.length - 1 ? <hr /> : null}
 			</div>
 		));

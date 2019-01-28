@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 class Header extends Component {
     getStyle(): React.CSSProperties {
         return {
             width: "100%",
             backgroundColor: "#ff6600",
-            height: "40px"
+            height: "30px"
         }
     }
 
@@ -20,17 +20,28 @@ class Header extends Component {
         }
     }
 
+    getLinkStyle(): React.CSSProperties {
+        return {
+            color: "black",
+            marginRight: "10px"
+        }
+    }
+
+    renderLink(to: string, label: any) {
+        return <NavLink activeStyle={{ color: "white" }} exact={true} to={to} style={this.getLinkStyle()}>{label}</NavLink>;
+    }
+
     render() {
         return (
             <header style={this.getStyle()}>
                 <div style={this.getInnerStyle()}>
-                    <Link to="/">YAHN</Link>
-                    <Link to="/new">new</Link>
-                    <Link to="/ask">ask</Link>
-                    <Link to="/show">show</Link>
-                    <Link to="/jobs">jobs</Link>
+                    <img style={{ border: "1px white solid", marginRight: "10px" }} src="https://news.ycombinator.com/y18.gif"></img>
+                    {this.renderLink("/", "YAHN")}
+                    {this.renderLink("/new", "new")}
+                    {this.renderLink("/ask", "ask")}
+                    {this.renderLink("/show", "show")}
+                    {this.renderLink("/jobs", "jobs")}
                 </div>
-
             </header>
         );
     }

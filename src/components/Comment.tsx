@@ -23,6 +23,7 @@ class Comment extends Component<{ item: IItem }, IState> {
     renderChildren() {
         const item = this.props.item;
         const kids = item.kids;
+
         if (!kids) {
             return;
         }
@@ -30,20 +31,14 @@ class Comment extends Component<{ item: IItem }, IState> {
         if (this.state.showChildren && this.state.children) {
             const comments = this.state.children.map((c, i) => <Comment key={i} item={c} />);
             return (
-                <div>
+                <div style={{ marginLeft: "20px" }}>
                     {comments}
                 </div>
             );
         }
         else {
-            return (
-                <div>
-                    <a onClick={() => this.showChildren()}>{item.kids.length} comments</a>
-                </div>
-            );
+            return <a style={{ color: "#444", textDecoration: "underline", cursor: "pointer" }} onClick={() => this.showChildren()}>{item.kids.length} comments</a>;
         }
-
-
     }
 
     showChildren() {
@@ -65,7 +60,7 @@ class Comment extends Component<{ item: IItem }, IState> {
             <div>
                 <div style={{ color: "#444" }}>{item.by} {dayjs().diff(dayjs(item.time * 1000), "hour")} hours ago</div>
                 <div dangerouslySetInnerHTML={{ __html: item.text }} />
-                <div>{this.renderChildren()}</div>
+                <div style={{ marginTop: "10px" }}>{this.renderChildren()}</div>
             </div>
 
         );

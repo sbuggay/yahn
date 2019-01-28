@@ -30,7 +30,7 @@ class UserPage extends Component<any, IUser> {
         }
 
         return (
-            <div>
+            <div style={{ marginTop: "10px" }}>
                 <div>id: {this.state.id}</div>
                 <div>karma: {this.state.karma}</div>
                 <div>created: {this.state.created}</div>

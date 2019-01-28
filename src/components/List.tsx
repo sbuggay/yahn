@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import { HNAPI, EListTypes } from '../hn/api';
 import Item from './Item';
 import { IItem } from '../hn/interfaces';
+import queryString from "query-string";
+import { Link } from 'react-router-dom';
 
 interface IProps {
 	listFunction: () => Promise<number[]>;
+	location?: any;
 }
 
 interface IState {
 	stories: IItem[];
+	page: number;
 }
 
 class List extends Component<IProps, IState> {
@@ -18,32 +22,28 @@ class List extends Component<IProps, IState> {
 		super(props);
 
 		this.state = {
-			stories: []
+			stories: [],
+			page: 1
 		}
 	}
 
 	componentDidMount() {
-		if (this.props.listFunction) {
-			this.props.listFunction().then(json => {
-				json = json.slice(0, 30);
-				Promise.all(json.map(id => HNAPI.getItem(id))).then(res => {
-					this.setState({
-						stories: res
-					});
+		const query = queryString.parse(window.location.search)
+		const page = query.p ? (parseInt(query.p as string) - 1) * 30 : 0
+		const data = this.props.listFunction ? this.props.listFunction : () => HNAPI.getList(EListTypes.topstories);
+
+		
+
+		data().then(json => {
+			json = json.slice(page, page + 30);
+			Promise.all(json.map(id => HNAPI.getItem(id))).then(res => {
+				this.setState({
+					stories: res
 				});
 			});
-		}
-		else {
-			HNAPI.getList(EListTypes.topstories).then(json => {
-				json = json.slice(0, 30);
-				Promise.all(json.map(id => HNAPI.getItem(id))).then(res => {
-					this.setState({
-						stories: res
-					});
-				});
-			});
-		}
+		});
 	}
+
 
 	render() {
 		const renderStories = () => {
@@ -57,6 +57,9 @@ class List extends Component<IProps, IState> {
 		return (
 			<div>
 				{renderStories()}
+				{/* <div>
+					<Link to={{ pathname: window.location.pathname, search: `p=${this.state.page + 1}` }}>Next Page</Link>
+				</div> */}
 			</div>
 		);
 	}

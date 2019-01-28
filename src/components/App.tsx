@@ -26,7 +26,6 @@ class App extends Component {
 							<Route path="/item" component={ItemPage} />
 							<Route path="/user" component={UserPage} />
 							<Route path="/new" component={() => <List listFunction={() => HNAPI.getList(EListTypes.newstories)} />} />
-							<Route path="/comments" component={() => <List listFunction={() => HNAPI.getList(EListTypes.newstories)} />} />
 							<Route path="/ask" component={() => <List listFunction={() => HNAPI.getList(EListTypes.askstories)} />} />
 							<Route path="/show" component={() => <List listFunction={() => HNAPI.getList(EListTypes.showstories)} />} />
 							<Route path="/jobs" component={() => <List listFunction={() => HNAPI.getList(EListTypes.jobstories)} />} />
