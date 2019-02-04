@@ -39,11 +39,11 @@ class Header extends Component {
                 <div style={this.getInnerStyle()}>
                     <Link to="/yahn" style={{ marginRight: "10px", color: "white", border: "1px white solid", width: "20px", height: "20px", textAlign: "center" }}>Y</Link>
                     {/* <img style={{ border: "1px white solid", marginRight: "10px" }} src="https://news.ycombinator.com/y18.gif"></img> */}
-                    {this.renderLink("/yahn", "YAHN")}
-                    {this.renderLink("/yahn/new", "new")}
-                    {this.renderLink("/yahn/ask", "ask")}
-                    {this.renderLink("/yahn/show", "show")}
-                    {this.renderLink("/yahn/jobs", "jobs")}
+                    {this.renderLink("/", "YAHN")}
+                    {this.renderLink("/new", "new")}
+                    {this.renderLink("/ask", "ask")}
+                    {this.renderLink("/show", "show")}
+                    {this.renderLink("/jobs", "jobs")}
                 </div>
 
             </header>

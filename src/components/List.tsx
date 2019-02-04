@@ -57,6 +57,8 @@ class List extends Component<IProps, IState> {
 			}
 
 			return this.state.stories.map((item, index) => {
+				if (!item) return;
+				item.index = (index + (this.state.page - 1) * 30) + 1;
 				return (
 					<Item key={index} item={item} />
 				);

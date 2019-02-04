@@ -6,6 +6,7 @@ import ItemPage from './ItemPage';
 import Header from './Header';
 import UserPage from './UserPage';
 import { HNAPI, EListTypes } from '../hn/api';
+import { lightTheme, darkTheme } from '../themes/theme';
 
 class App extends Component {
 	getStyle(): React.CSSProperties {
@@ -15,20 +16,27 @@ class App extends Component {
 		}
 	}
 
+	getBackgroundStyle(): React.CSSProperties {
+		
+		return {
+			backgroundColor: darkTheme.background.backgroundColor
+		}
+	}
+
 	render() {
 		return (
 			<Router>
-				<div>
+				<div style={this.getBackgroundStyle()}>
 					<Header />
 					<main style={this.getStyle()}>
 						<Switch>
-							<Route exact path="/yahn" component={List} />
-							<Route path="/yahn/item" component={ItemPage} />
-							<Route path="/yahn/user" component={UserPage} />
-							<Route path="/yahn/new" component={() => <List listFunction={() => HNAPI.getList(EListTypes.newstories)} />} />
-							<Route path="/yahn/ask" component={() => <List listFunction={() => HNAPI.getList(EListTypes.askstories)} />} />
-							<Route path="/yahn/show" component={() => <List listFunction={() => HNAPI.getList(EListTypes.showstories)} />} />
-							<Route path="/yahn/jobs" component={() => <List listFunction={() => HNAPI.getList(EListTypes.jobstories)} />} />
+							<Route exact path="/" component={List} />
+							<Route path="/item" component={ItemPage} />
+							<Route path="/user" component={UserPage} />
+							<Route path="/new" component={() => <List listFunction={() => HNAPI.getList(EListTypes.newstories)} />} />
+							<Route path="/ask" component={() => <List listFunction={() => HNAPI.getList(EListTypes.askstories)} />} />
+							<Route path="/show" component={() => <List listFunction={() => HNAPI.getList(EListTypes.showstories)} />} />
+							<Route path="/jobs" component={() => <List listFunction={() => HNAPI.getList(EListTypes.jobstories)} />} />
 						</Switch>
 					</main>
 				</div>

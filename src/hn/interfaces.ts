@@ -23,6 +23,7 @@ export interface IItem {
     parts: number[]; // poll only
     descendants: number;
     comments: IItem[];
+    index: number;
 }
 
 export interface IUser {
