@@ -25,7 +25,7 @@ class App extends Component {
 
 	render() {
 		return (
-			<Router>
+			<Router basename="/yahn/">
 				<div style={this.getBackgroundStyle()}>
 					<Header />
 					<main style={this.getStyle()}>
