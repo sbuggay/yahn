@@ -4,6 +4,7 @@ import { IItem } from '../hn/interfaces';
 
 import dayjs from "dayjs";
 import { HNAPI } from '../hn/api';
+import { colors } from '../themes/theme';
 
 interface IState {
     showChildren: boolean;
@@ -29,15 +30,22 @@ class Comment extends Component<{ item: IItem }, IState> {
         }
 
         if (this.state.showChildren && this.state.children) {
-            const comments = this.state.children.map((c, i) => <Comment key={i} item={c} />);
+            const comments = this.state.children.map((c, i) =>
+                (
+                    <div>
+                        <hr />
+                        <Comment key={i} item={c} />
+                    </div>
+                )
+            );
             return (
-                <div style={{ marginLeft: "20px" }}>
+                <div style={{ paddingLeft: "20px", borderLeft: "2px dashed #888" }}>
                     {comments}
                 </div>
             );
         }
         else {
-            return <a style={{ color: "#444", textDecoration: "underline", cursor: "pointer" }} onClick={() => this.showChildren()}>{item.kids.length} comments</a>;
+            return <a style={{ color: colors.highlight, textDecoration: "underline", cursor: "pointer" }} onClick={() => this.showChildren()}>{item.kids.length} comments</a>;
         }
     }
 
@@ -63,7 +71,10 @@ class Comment extends Component<{ item: IItem }, IState> {
 
         return (
             <div>
-                <div style={{ color: "#444" }}>{item.by} {dayjs().diff(dayjs(item.time * 1000), "hour")} hours ago</div>
+                <div>
+                    <span><Link style={{ color: colors.highlight }} to={`/user?id=${item.by}`}>{item.by}</Link> </span>
+                    <span style={{ color: colors.light }}>{dayjs().diff(dayjs(item.time * 1000), "hour")} hours ago</span>
+                </div>
                 <div dangerouslySetInnerHTML={{ __html: item.text }} />
                 <div style={{ marginTop: "10px" }}>{this.renderChildren()}</div>
             </div>

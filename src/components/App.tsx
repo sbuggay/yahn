@@ -17,9 +17,8 @@ class App extends Component {
 	}
 
 	getBackgroundStyle(): React.CSSProperties {
-		
 		return {
-			backgroundColor: darkTheme.background.backgroundColor
+			backgroundColor: lightTheme.background.backgroundColor
 		}
 	}
 

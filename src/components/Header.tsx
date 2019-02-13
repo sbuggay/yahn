@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { colors } from '../themes/theme';
 
 class Header extends Component {
     getStyle(): React.CSSProperties {
         return {
             width: "100%",
-            backgroundColor: "#ff6600",
+            backgroundColor: colors.subtle,
             height: "30px",
             display: "flex",
-            justifyContent: "space-between"
+            justifyContent: "space-between",
+            fontSize: "1.2em"
         }
     }
 
@@ -24,7 +26,7 @@ class Header extends Component {
 
     getLinkStyle(): React.CSSProperties {
         return {
-            color: "black",
+            color: "#ccc",
             marginRight: "10px"
         }
     }
@@ -37,7 +39,6 @@ class Header extends Component {
         return (
             <header style={this.getStyle()}>
                 <div style={this.getInnerStyle()}>
-                    <Link to="/yahn" style={{ marginRight: "10px", color: "white", border: "1px white solid", width: "20px", height: "20px", textAlign: "center" }}>Y</Link>
                     {/* <img style={{ border: "1px white solid", marginRight: "10px" }} src="https://news.ycombinator.com/y18.gif"></img> */}
                     {this.renderLink("/", "YAHN")}
                     {this.renderLink("/new", "new")}

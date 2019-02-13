@@ -5,6 +5,7 @@ import { IItem } from '../hn/interfaces';
 import queryString from "query-string";
 import { Link } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner';
+import { colors } from '../themes/theme';
 
 interface IProps {
 	listFunction: () => Promise<number[]>;
@@ -49,9 +50,32 @@ class List extends Component<IProps, IState> {
 	render() {
 		const renderStories = () => {
 			if (this.state.stories.length === 0) {
+
+				const style = {
+					color: "#ccc",
+					height: "21.6px",
+				}
+
+				const getRandomInt = (max: number) => {
+					return Math.floor(Math.random() * Math.floor(max));
+				}
+
+				const ghostElements = Array(30).fill(0).map((_, key) => {
+					return (
+						<div style={{ marginTop: "5px" }}>
+							<div style={{ ...style, width: 500 + getRandomInt(200) + "px" }}>
+								<div style={{ borderRadius: "10px", height: "90%", width: "90%", backgroundColor: "#ccc" }}></div>
+							</div>
+							<div style={{ ...style, width: 300 + getRandomInt(100) + "px", }}>
+								<div style={{ borderRadius: "10px", height: "90%", width: "90%", backgroundColor: "#ccc" }}></div>
+							</div>
+						</div>
+					)
+				});
+
 				return (
-					<div style={{ width: "64px", height: "64px", margin: "64px auto" }}>
-						<LoadingSpinner />
+					<div>
+						{ghostElements}
 					</div>
 				);
 			}
