@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/yahn/static/js/runtime~main.58f046eb.js"
   },
   {
-    "revision": "5758acac4eb9630d81060a12cff8b109",
+    "revision": "9ce0074601e9f9326572e68614ded811",
     "url": "/yahn/index.html"
   }
 ];
