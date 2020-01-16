@@ -11,7 +11,7 @@ class Header extends Component {
             display: "flex",
             justifyContent: "space-between",
             fontSize: "1.2em",
-            padding: "8px 8px"
+            padding: "8px 0"
         }
     }
 
@@ -22,7 +22,7 @@ class Header extends Component {
             alignItems: "center",
             margin: "0 auto",
             height: "100%",
-            
+            padding: "0 8px"
         }
     }
 

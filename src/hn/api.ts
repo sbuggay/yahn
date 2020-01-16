@@ -35,13 +35,13 @@ export class HNAPI {
 		}
 
 		// on any list, just try and restore from cache
-		const cachedList = localStorage.getItem("listCache");
-		if (cachedList) {
-			const parsedCachedList = JSON.parse(cachedList);
-			if (Date.now() < parsedCachedList.expiry && parsedCachedList[type]) {
-				return Promise.resolve(parsedCachedList[type]);
-			}
-		}
+		// const cachedList = localStorage.getItem("listCache");
+		// if (cachedList) {
+		// 	const parsedCachedList = JSON.parse(cachedList);
+		// 	if (Date.now() < parsedCachedList.expiry && parsedCachedList[type]) {
+		// 		return Promise.resolve(parsedCachedList[type]);
+		// 	}
+		// }
 
 		const res = await apiRequest(type);
 
@@ -55,10 +55,10 @@ export class HNAPI {
 
 		listCache[type] = res;
 
-		localStorage.setItem("listCache", JSON.stringify({
-			listCache,
-			expiry: Date.now() + 300000 // 5 min in future
-		}));
+		// localStorage.setItem("listCache", JSON.stringify({
+		// 	listCache,
+		// 	expiry: Date.now() + 300000 // 5 min in future
+		// }));
 
 		return res;
 	}
@@ -68,22 +68,22 @@ export class HNAPI {
 			return Promise.resolve(itemCache[id]);
 		}
 
-		const cachedItem = localStorage.getItem(id.toString());
-		if (cachedItem) {
-			const parsedItem = JSON.parse(cachedItem);
-			if (Date.now() < parsedItem.expiry && parsedItem.item) {
-				return Promise.resolve(parsedItem.item);
-			}
-		}
+		// const cachedItem = localStorage.getItem(id.toString());
+		// if (cachedItem) {
+		// 	const parsedItem = JSON.parse(cachedItem);
+		// 	if (Date.now() < parsedItem.expiry && parsedItem.item) {
+		// 		return Promise.resolve(parsedItem.item);
+		// 	}
+		// }
 
 		const res = await apiRequest(`item/${id}`);
 
 		itemCache[id] = res;
 
-		localStorage.setItem(id.toString(), JSON.stringify({
-			item: res,
-			expiry: Date.now() + 300000 // 5 min in future
-		}));
+		// localStorage.setItem(id.toString(), JSON.stringify({
+		// 	item: res,
+		// 	expiry: Date.now() + 300000 // 5 min in future
+		// }));
 
 		return res;
 	}
