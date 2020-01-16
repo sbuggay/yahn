@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "2589eba86f8e7d3f081b",
+    "revision": "46366f79ae6827c3608d",
     "url": "/yahn/static/css/main.de5025c9.chunk.css"
   },
   {
-    "revision": "2589eba86f8e7d3f081b",
-    "url": "/yahn/static/js/main.2589eba8.chunk.js"
+    "revision": "46366f79ae6827c3608d",
+    "url": "/yahn/static/js/main.46366f79.chunk.js"
   },
   {
     "revision": "ba6e15154552e467280d",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/yahn/static/js/runtime~main.58f046eb.js"
   },
   {
-    "revision": "3817084db56403c5aeed80217bf3c2a4",
+    "revision": "a55156a1eb6ddc64c82d44c0b8d4a2fe",
     "url": "/yahn/index.html"
   }
 ];
