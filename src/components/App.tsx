@@ -13,7 +13,7 @@ class App extends Component {
 		return {
 			maxWidth: "800px",
 			margin: "0 auto 200px",
-			padding: "0 8px",
+			padding: "8px 8px",
 		}
 	}
 

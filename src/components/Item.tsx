@@ -22,7 +22,9 @@ class Item extends Component<{ item: IItem }, any> {
 
 	getSubStyle(): React.CSSProperties {
 		return {
-			color: colors.light
+			color: colors.light,
+			display: "flex",
+			flexWrap: "wrap"
 		}
 	}
 
@@ -32,20 +34,20 @@ class Item extends Component<{ item: IItem }, any> {
 		const link = item.url ? <a style={{ color: colors.light }} href="">({url_domain(item.url)})</a> : null;
 
 		return (
-			<span>
+			<div>
 				<a href={item.url}>{item.title}</a> {link}
-			</span>
+			</div>
 		);
 	}
 
 	renderCommentInfo() {
 		const item = this.props.item;
 		if (!item.kids) {
-			return <span> | no comments</span>;
+			return <div>no comments</div>;
 		}
 
 		return (
-			<span> <Link style={{ color: colors.highlight }} to={`/item?id=${item.id}`}>{item.kids.length} comment{item.kids.length === 1 ? "" : "s"}</Link></span>
+			<div><Link style={{ color: colors.highlight }} to={`/item?id=${item.id}`}>{item.kids.length} comment{item.kids.length === 1 ? "" : "s"}</Link></div>
 		);
 	}
 
@@ -59,9 +61,9 @@ class Item extends Component<{ item: IItem }, any> {
 				<div style={this.getStyle()}>
 					{this.renderHeader()}
 					<div style={this.getSubStyle()}>
-						<span>{item.score} points</span>
-						<span> by <Link style={{ color: colors.highlight }} to={`/user?id=${item.by}`}>{item.by}</Link></span>
-						<span> {distanceInWordsToNow(item.time * 1000)} ago</span>
+						<div style={{marginRight: "4px"}}>{item.score} points</div>
+						<div style={{marginRight: "4px"}}>by <Link style={{ color: colors.highlight }} to={`/user?id=${item.by}`}>{item.by}</Link></div>
+						<div style={{marginRight: "4px"}}>{distanceInWordsToNow(item.time * 1000)} ago</div>
 						{this.renderCommentInfo()}
 					</div>
 				</div>
