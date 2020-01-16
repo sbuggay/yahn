@@ -54,7 +54,7 @@ class Item extends Component<{ item: IItem }, any> {
 		const item = this.props.item;
 		return (
 			<div style={{ position: "relative" }}>
-				<div style={{ position: "absolute", left: "-40px", right: "0", color: colors.light }}>{item.index}</div>
+				{/* <div style={{ position: "absolute", left: "-40px", right: "0", color: colors.light }}>{item.index}</div> */}
 
 				<div style={this.getStyle()}>
 					{this.renderHeader()}

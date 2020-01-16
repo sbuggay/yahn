@@ -11,8 +11,9 @@ import { lightTheme, darkTheme } from '../themes/theme';
 class App extends Component {
 	getStyle(): React.CSSProperties {
 		return {
-			width: "800px",
-			margin: "0 auto 200px"
+			maxWidth: "800px",
+			margin: "0 auto 200px",
+			padding: "0 8px",
 		}
 	}
 
@@ -25,7 +26,7 @@ class App extends Component {
 	render() {
 		return (
 			<Router basename="/yahn/">
-				<div style={this.getBackgroundStyle()}>
+				<article style={this.getBackgroundStyle()}>
 					<Header />
 					<main style={this.getStyle()}>
 						<Switch>
@@ -38,7 +39,7 @@ class App extends Component {
 							<Route path="/jobs" component={() => <List listFunction={() => HNAPI.getList(EListTypes.jobstories)} />} />
 						</Switch>
 					</main>
-				</div>
+				</article>
 			</Router>
 		);
 	}
