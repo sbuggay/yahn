@@ -45,7 +45,7 @@ class Comment extends Component<{ item: IItem }, IState> {
             );
         }
         else {
-            return <a style={{ color: colors.highlight, textDecoration: "underline", cursor: "pointer" }} onClick={() => this.showChildren()}>{item.kids.length} comments</a>;
+            return <a style={{ color: colors.highlight, textDecoration: "underline", cursor: "pointer" }} onClick={() => this.showChildren()}>{item.kids.length} comment{item.kids.length === 1 ? "" : "s"}</a>;
         }
     }
 
