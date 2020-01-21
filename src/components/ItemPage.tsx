@@ -53,8 +53,6 @@ class ItemPage extends Component<any, IItem> {
 
 	render() {
 
-
-
 		if (!this.state) {
 			return (
 				<div>loading...</div>
@@ -63,7 +61,7 @@ class ItemPage extends Component<any, IItem> {
 
 		return (
 			<div>
-				<Item item={this.state} />
+				<Item item={this.state} linkComments={false} />
 				{this.state.text ? <div dangerouslySetInnerHTML={{ __html: this.state.text }} /> : null}
 				<div style={{ marginTop: "10px" }}>
 					{this.renderComments()}

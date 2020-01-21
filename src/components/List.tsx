@@ -34,8 +34,6 @@ class List extends Component<IProps, IState> {
 		const page = query.p ? (parseInt(query.p as string) - 1) * 30 : 0
 		const data = this.props.listFunction ? this.props.listFunction : () => HNAPI.getList(EListTypes.topstories);
 
-
-
 		data().then(json => {
 			json = json.slice(page, page + 30);
 			Promise.all(json.map(id => HNAPI.getItem(id))).then(res => {
